@@ -1,9 +1,11 @@
 package git.meowinnovation.inputfix;
 
 import cpw.mods.fml.common.Mod;
+import cpw.mods.fml.common.SidedProxy;
 import cpw.mods.fml.common.event.FMLInitializationEvent;
 import cpw.mods.fml.common.event.FMLPostInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
+import git.meowinnovation.inputfix.common.CommonProxy;
 
 /**
  * Created by Fang0716 on 6/1/2014.
@@ -18,8 +20,12 @@ public class UniversalInputFix {
     @Mod.Instance(UniversalInputFix.MODID)
     public static UniversalInputFix instance;
 
+    @SidedProxy(clientSide = "git.meowinnovation.inputfix.client.ClientProxy", serverSide = "git.meowinnovation.inputfix.common.CommonProxy")
+    public static CommonProxy proxy;
+
     @Mod.EventHandler
     public void preInit(FMLPreInitializationEvent event) {
+        proxy.init();
     }
 
     @Mod.EventHandler
