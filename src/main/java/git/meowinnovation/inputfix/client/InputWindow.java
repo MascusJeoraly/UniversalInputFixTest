@@ -26,26 +26,28 @@ import javax.swing.JTextArea;
 import javax.swing.JToggleButton;
 import javax.swing.KeyStroke;
 
+import cpw.mods.fml.client.FMLClientHandler;
+
 public class InputWindow {
- 
-	
-    public static void showGUI() {
+
+	public static void showGUI() {
 
 		final JFrame frame = new JFrame("Input Window");
 		final JTextArea comp = new JTextArea();
-		
-		
-	
+
+		Toolkit tk = Toolkit.getDefaultToolkit();// 得到Toolkit对象(实例化)
+		Dimension screen = tk.getScreenSize();// 得到屏幕的大小
+
 		frame.getContentPane().add(comp, BorderLayout.CENTER);
-		frame.setSize(288, 40);
+		frame.setSize(screen.width, 20);
 		frame.setUndecorated(true);
 		frame.setVisible(true);
+		frame.setAlwaysOnTop(true);
+		frame.setLocation(0, screen.height - 20);
 		comp.requestFocus();
-		
-		KeyStroke enter = KeyStroke
-				.getKeyStroke(KeyEvent.VK_ENTER, 0);
-		KeyStroke esc = KeyStroke
-				.getKeyStroke(KeyEvent.VK_ESCAPE, 0);
+
+		KeyStroke enter = KeyStroke.getKeyStroke(KeyEvent.VK_ENTER, 0);
+		KeyStroke esc = KeyStroke.getKeyStroke(KeyEvent.VK_ESCAPE, 0);
 		InputMap inputmap = comp.getInputMap();
 		ActionMap actionmap = comp.getActionMap();
 
@@ -53,11 +55,12 @@ public class InputWindow {
 
 			@Override
 			public void actionPerformed(ActionEvent event) {
-				System.out.println("enter");
+				sendMessage(comp.getText());
+				frame.dispose();
 			}
 
 		};
-		
+
 		Action escaction = new AbstractAction() {
 
 			@Override
@@ -67,13 +70,15 @@ public class InputWindow {
 
 		};
 
-		
 		inputmap.put(enter, "enter");
 		inputmap.put(esc, "esc");
 		actionmap.put("enter", enteraction);
 		actionmap.put("esc", escaction);
 	}
-    
-    
+
+	public static void sendMessage(String message) {
+		FMLClientHandler.instance().getClient().thePlayer
+				.sendChatMessage(message);
+	}
 
 }

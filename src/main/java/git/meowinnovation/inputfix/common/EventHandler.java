@@ -26,16 +26,18 @@ import java.io.IOException;
 
 /**
  * Created by Fang0716 on 6/2/2014.
- *
+ * 
  * @author Meow J
  */
 public class EventHandler {
-    public static EventHandler instance = new EventHandler();
+	public static EventHandler instance = new EventHandler();
 
-    @SubscribeEvent
-    public void openMainMenu(GuiOpenEvent event) throws IOException {
-        if (event.gui != null && event.gui.getClass() == GuiChat.class)
-            InputWindow.showGUI();
-        //TODO add other gui
-    }
+	@SubscribeEvent
+	public void openMainMenu(GuiOpenEvent event) throws IOException {
+		if (event.gui != null && event.gui.getClass() == GuiChat.class) {
+			event.setCanceled(true);
+			InputWindow.showGUI();
+			// TODO add other gui
+		}
+	}
 }
