@@ -34,8 +34,8 @@ public class EventHandler {
 
     @SubscribeEvent
     public void openMainMenu(GuiOpenEvent event) throws IOException {
-        if (event.gui != null && event.gui.getClass() == GuiChat.class)
-            InputWindow.showGUI();
-        //TODO add other gui
+        if (event.gui == null) return;
+        if (event.gui.getClass() == GuiChat.class || event.gui.allowUserInput)
+            InputWindow.showGUI(event.gui);
     }
 }

@@ -18,6 +18,9 @@
 package git.meowinnovation.inputfix.client;
 
 import cpw.mods.fml.client.FMLClientHandler;
+import net.minecraft.client.gui.GuiChat;
+import net.minecraft.client.gui.GuiScreen;
+import net.minecraft.util.StringUtils;
 
 import javax.swing.*;
 import java.awt.*;
@@ -26,7 +29,7 @@ import java.awt.event.KeyEvent;
 
 public class InputWindow {
 
-    public static void showGUI() {
+    public static void showGUI(final GuiScreen gui) {
 
         final JFrame frame = new JFrame("Input Window");
         final JTextArea comp = new JTextArea();
@@ -49,7 +52,14 @@ public class InputWindow {
 
             @Override
             public void actionPerformed(ActionEvent event) {
-                System.out.println("enter");
+                if (gui.getClass() == GuiChat.class) {
+                    if (!StringUtils.isNullOrEmpty(comp.getText())) {
+                        FMLClientHandler.instance().getClient().thePlayer.sendChatMessage(comp.getText());
+                    }
+                } else {
+                    //TODO other gui
+                }
+                comp.setText("");
             }
 
         };
@@ -68,8 +78,6 @@ public class InputWindow {
         inputmap.put(esc, "esc");
         actionmap.put("enter", enteraction);
         actionmap.put("esc", escaction);
-        //TODO replace it
-        FMLClientHandler.instance().getClient().thePlayer.sendChatMessage("test");
     }
 
 
