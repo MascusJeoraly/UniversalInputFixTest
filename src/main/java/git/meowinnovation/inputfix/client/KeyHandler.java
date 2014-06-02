@@ -31,6 +31,7 @@ public class KeyHandler {
             Minecraft mc = FMLClientHandler.instance().getClient();
             mc.setIngameNotInFocus();
             //TODO attach Window
+            InputWindow.showGUI();
         }
     }
 }
