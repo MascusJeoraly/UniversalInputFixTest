@@ -55,11 +55,13 @@ public class InputWindow extends JFrame {
 	final static JFrame frame = new JFrame("Input Window");
 	final static JTextArea comp = new JTextArea();
 	final static JScrollPane scroll = new JScrollPane(comp);
+	final static Font font = new Font("微软雅黑", 0 , 17);
 
 	public static void showGUI(String text) {
-		frame.getContentPane().add(scroll , BorderLayout.CENTER);
+		frame.getContentPane().add(scroll, BorderLayout.CENTER);
 		scroll.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
-		
+		comp.setFont(font);
+
 		if (text.equalsIgnoreCase("/")) {
 			comp.setText(text);
 			comp.setSelectionStart(1);
