@@ -10,7 +10,7 @@ import git.meowinnovation.inputfix.common.CommonProxy;
 /**
  * Created by Fang0716 on 6/1/2014.
  *
- * @author Meow J
+ * @author Meow J and Brian
  */
 @Mod(modid = UniversalInputFix.MODID, name = UniversalInputFix.NAME, version = "0.0.1")
 public class UniversalInputFix {
