@@ -83,9 +83,10 @@ public class InputWindow extends JFrame {
 								.sendChatMessage(comp.getText());
 						frame.dispose();
 						comp.setText("");
-			            
+						FMLClientHandler.instance().getClient().thePlayer.closeScreen();
 					} else {
 						frame.dispose();
+						FMLClientHandler.instance().getClient().thePlayer.closeScreen();
 					}
 				
 			}
@@ -97,6 +98,7 @@ public class InputWindow extends JFrame {
 			@Override
 			public void actionPerformed(ActionEvent event) {
 				frame.dispose();
+				FMLClientHandler.instance().getClient().thePlayer.closeScreen();
 			}
 
 		};
