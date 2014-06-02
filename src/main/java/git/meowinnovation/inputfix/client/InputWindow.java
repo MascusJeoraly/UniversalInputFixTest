@@ -54,16 +54,20 @@ public class InputWindow extends JFrame {
 	final static JFrame frame = new JFrame("Input Window");
 	final static JTextArea comp = new JTextArea();
 
-	public static void showGUI() {
+	public static void showGUI(String text) {
 		frame.getContentPane().add(comp, BorderLayout.CENTER);
+		if (text.equalsIgnoreCase("/")) {
+			comp.setText(text);
+			comp.setSelectionStart(1);
+			comp.setSelectionEnd(1);
+		}
 		frame.setSize(Display.getWidth(), 25);
 		frame.setUndecorated(true);
 		frame.setLocation(Display.getX(), Display.getY() + Display.getHeight()
 				- 5);
 		frame.setAlwaysOnTop(true);
 		frame.setVisible(true);
-		
-		
+
 		FMLClientHandler.instance().getClient().setIngameNotInFocus();
 		comp.requestFocus();
 
@@ -78,17 +82,19 @@ public class InputWindow extends JFrame {
 
 			@Override
 			public void actionPerformed(ActionEvent event) {
-					if (!StringUtils.isNullOrEmpty(comp.getText())) {
-						FMLClientHandler.instance().getClient().thePlayer
-								.sendChatMessage(comp.getText());
-						frame.dispose();
-						comp.setText("");
-						FMLClientHandler.instance().getClient().thePlayer.closeScreen();
-					} else {
-						frame.dispose();
-						FMLClientHandler.instance().getClient().thePlayer.closeScreen();
-					}
-				
+				if (!StringUtils.isNullOrEmpty(comp.getText())) {
+					FMLClientHandler.instance().getClient().thePlayer
+							.sendChatMessage(comp.getText());
+					frame.dispose();
+					comp.setText("");
+					FMLClientHandler.instance().getClient().thePlayer
+							.closeScreen();
+				} else {
+					frame.dispose();
+					FMLClientHandler.instance().getClient().thePlayer
+							.closeScreen();
+				}
+
 			}
 
 		};
@@ -107,11 +113,10 @@ public class InputWindow extends JFrame {
 		inputmap.put(esc, "esc");
 		actionmap.put("enter", enteraction);
 		actionmap.put("esc", escaction);
-		
+
 	}
 
-	
-	public static void closeframe(){
+	public static void closeframe() {
 		frame.dispose();
 	}
 

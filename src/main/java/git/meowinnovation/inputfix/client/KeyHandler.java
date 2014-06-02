@@ -53,13 +53,18 @@ public class KeyHandler {
 				FMLClientHandler.instance().displayGuiScreen(
 						FMLClientHandler.instance().getClient().thePlayer,
 						new GuiChat());
-				InputWindow.showGUI();
-				System.out.println(FMLClientHandler.instance()
-						.getCurrentLanguage());
+				InputWindow.showGUI("");
 			}
 		}
 		if (commandkey.isPressed()) {
-
+			Minecraft mc = FMLClientHandler.instance().getClient();
+			// TODO attach Window
+			if (FMLClientHandler.instance().getClient().thePlayer != null) {
+				FMLClientHandler.instance().displayGuiScreen(
+						FMLClientHandler.instance().getClient().thePlayer,
+						new GuiChat());
+				InputWindow.showGUI("/");
+			}
 		}
 	}
 }
