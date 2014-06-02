@@ -18,6 +18,7 @@
 package git.meowinnovation.inputfix.client;
 
 import cpw.mods.fml.client.FMLClientHandler;
+import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiChat;
 import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.util.StringUtils;
@@ -45,22 +46,24 @@ import javax.swing.JToggleButton;
 import javax.swing.KeyStroke;
 
 import cpw.mods.fml.client.FMLClientHandler;
+import cpw.mods.fml.common.Mod.EventHandler;
 
 import org.lwjgl.opengl.Display;
 
 public class InputWindow extends JFrame {
+	final static JFrame frame = new JFrame("Input Window");
+	final static JTextArea comp = new JTextArea();
 
-	public static void showGUI(final GuiScreen gui) {
-
-		final JFrame frame = new JFrame("Input Window");
-		final JTextArea comp = new JTextArea();
-
+	public static void showGUI() {
 		frame.getContentPane().add(comp, BorderLayout.CENTER);
 		frame.setSize(Display.getWidth(), 25);
 		frame.setUndecorated(true);
-		frame.setVisible(true);
 		frame.setLocation(Display.getX(), Display.getY() + Display.getHeight()
 				- 5);
+		frame.setAlwaysOnTop(true);
+		frame.setVisible(true);
+		
+		
 		FMLClientHandler.instance().getClient().setIngameNotInFocus();
 		comp.requestFocus();
 
@@ -71,18 +74,20 @@ public class InputWindow extends JFrame {
 
 		Action enteraction = new AbstractAction() {
 
+			private Minecraft mc;
+
 			@Override
 			public void actionPerformed(ActionEvent event) {
-				if (gui.getClass() == GuiChat.class) {
 					if (!StringUtils.isNullOrEmpty(comp.getText())) {
 						FMLClientHandler.instance().getClient().thePlayer
 								.sendChatMessage(comp.getText());
 						frame.dispose();
+						comp.setText("");
+			            
+					} else {
+						frame.dispose();
 					}
-				} else {
-					// TODO other gui
-				}
-				comp.setText("");
+				
 			}
 
 		};
@@ -100,6 +105,12 @@ public class InputWindow extends JFrame {
 		inputmap.put(esc, "esc");
 		actionmap.put("enter", enteraction);
 		actionmap.put("esc", escaction);
+		
+	}
+
+	
+	public static void closeframe(){
+		frame.dispose();
 	}
 
 }

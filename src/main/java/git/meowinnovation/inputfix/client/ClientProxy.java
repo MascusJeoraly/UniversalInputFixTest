@@ -17,9 +17,12 @@
 
 package git.meowinnovation.inputfix.client;
 
+import cpw.mods.fml.common.FMLCommonHandler;
 import git.meowinnovation.inputfix.common.CommonProxy;
 import git.meowinnovation.inputfix.common.EventHandler;
 import net.minecraftforge.common.MinecraftForge;
+import cpw.mods.fml.common.FMLCommonHandler;
+import git.meowinnovation.inputfix.common.CommonProxy;
 
 /**
  * Created by Fang0716 on 6/1/2014.
@@ -31,6 +34,7 @@ public class ClientProxy extends CommonProxy {
     @Override
     public void init() {
         super.init();
+        FMLCommonHandler.instance().bus().register(new KeyHandler());
         MinecraftForge.EVENT_BUS.register(EventHandler.instance);
     }
 }
