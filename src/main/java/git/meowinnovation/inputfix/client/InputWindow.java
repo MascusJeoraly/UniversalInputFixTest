@@ -25,28 +25,45 @@ import javax.swing.KeyStroke;
 public class InputWindow {
 
 	public static void showGUI() {
-		JFrame frame = new JFrame("Input Window");
+
+		final JFrame frame = new JFrame("Input Window");
 		final JTextArea comp = new JTextArea();
-		KeyStroke enter_keystroke = KeyStroke
-				.getKeyStroke(KeyEvent.VK_ENTER, 0);
 
 		frame.getContentPane().add(comp, BorderLayout.CENTER);
 		frame.setSize(288, 40);
 		frame.setVisible(true);
 		comp.requestFocus();
+		
+		KeyStroke enter = KeyStroke
+				.getKeyStroke(KeyEvent.VK_ENTER, 0);
+		KeyStroke esc = KeyStroke
+				.getKeyStroke(KeyEvent.VK_ESCAPE, 0);
+		InputMap inputmap = comp.getInputMap();
+		ActionMap actionmap = comp.getActionMap();
 
-		Action send_message_then_clear_action = new AbstractAction() {
+		Action enteraction = new AbstractAction() {
 
 			@Override
-			public void actionPerformed(ActionEvent e) {
-				System.out.println(comp.getText());
+			public void actionPerformed(ActionEvent event) {
+				System.out.println("enter");
 			}
 
 		};
-		InputMap inputmap = comp.getInputMap();
-		ActionMap actionmap = comp.getActionMap();
-		inputmap.put(enter_keystroke,"send-message-then-clear");
-		actionmap.put("send-message-then-clear",send_message_then_clear_action);
+		
+		Action escaction = new AbstractAction() {
+
+			@Override
+			public void actionPerformed(ActionEvent event) {
+				frame.dispose();
+			}
+
+		};
+
+		
+		inputmap.put(enter, "enter");
+		inputmap.put(esc, "esc");
+		actionmap.put("enter", enteraction);
+		actionmap.put("esc", escaction);
 	}
 
 }
