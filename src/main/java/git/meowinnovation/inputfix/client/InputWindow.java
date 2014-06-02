@@ -33,6 +33,7 @@ public class InputWindow {
 
         frame.getContentPane().add(comp, BorderLayout.CENTER);
         frame.setSize(288, 40);
+        frame.setUndecorated(true);
         frame.setVisible(true);
         FMLClientHandler.instance().getClient().setIngameNotInFocus();
         comp.requestFocus();
