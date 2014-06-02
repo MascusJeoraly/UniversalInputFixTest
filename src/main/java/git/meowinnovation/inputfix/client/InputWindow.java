@@ -41,6 +41,7 @@ import javax.swing.JComponent;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JRadioButton;
+import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.JToggleButton;
 import javax.swing.KeyStroke;
@@ -53,9 +54,12 @@ import org.lwjgl.opengl.Display;
 public class InputWindow extends JFrame {
 	final static JFrame frame = new JFrame("Input Window");
 	final static JTextArea comp = new JTextArea();
+	final static JScrollPane scroll = new JScrollPane(comp);
 
 	public static void showGUI(String text) {
-		frame.getContentPane().add(comp, BorderLayout.CENTER);
+		frame.getContentPane().add(scroll , BorderLayout.CENTER);
+		scroll.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
+		
 		if (text.equalsIgnoreCase("/")) {
 			comp.setText(text);
 			comp.setSelectionStart(1);
@@ -85,11 +89,12 @@ public class InputWindow extends JFrame {
 				if (!StringUtils.isNullOrEmpty(comp.getText())) {
 					FMLClientHandler.instance().getClient().thePlayer
 							.sendChatMessage(comp.getText());
-					frame.dispose();
 					comp.setText("");
+					frame.dispose();
 					FMLClientHandler.instance().getClient().thePlayer
 							.closeScreen();
 				} else {
+					comp.setText("");
 					frame.dispose();
 					FMLClientHandler.instance().getClient().thePlayer
 							.closeScreen();
@@ -103,6 +108,7 @@ public class InputWindow extends JFrame {
 
 			@Override
 			public void actionPerformed(ActionEvent event) {
+				comp.setText("");
 				frame.dispose();
 				FMLClientHandler.instance().getClient().thePlayer.closeScreen();
 			}
