@@ -11,3 +11,34 @@
 /.gradle
 /build
 /lib
+
+# Eclipse #
+.classpath
+.project
+.metadata
+/.settings
+/bin
+
+# MacOS #
+.DS_Store
+.AppleDouble
+.LSOverride
+Icon
+._*
+.Spotlight-V100
+.Trashes
+.AppleDB
+.AppleDesktop
+Network Trash Folder
+Temporary Items
+.apdisk
+
+# Windows #
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+$RECYCLE.BIN/
+
+# GNU/Linux #
+*~
+.directory
