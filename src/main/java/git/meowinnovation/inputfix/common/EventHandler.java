@@ -15,22 +15,27 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package git.meowinnovation.inputfix.client;
+package git.meowinnovation.inputfix.common;
 
-import git.meowinnovation.inputfix.common.CommonProxy;
-import git.meowinnovation.inputfix.common.EventHandler;
-import net.minecraftforge.common.MinecraftForge;
+import cpw.mods.fml.common.eventhandler.SubscribeEvent;
+import git.meowinnovation.inputfix.client.InputWindow;
+import net.minecraft.client.gui.GuiChat;
+import net.minecraftforge.client.event.GuiOpenEvent;
+
+import java.io.IOException;
 
 /**
- * Created by Fang0716 on 6/1/2014.
+ * Created by Fang0716 on 6/2/2014.
  *
  * @author Meow J
  */
-public class ClientProxy extends CommonProxy {
+public class EventHandler {
+    public static EventHandler instance = new EventHandler();
 
-    @Override
-    public void init() {
-        super.init();
-        MinecraftForge.EVENT_BUS.register(EventHandler.instance);
+    @SubscribeEvent
+    public void openMainMenu(GuiOpenEvent event) throws IOException {
+        if (event.gui != null && event.gui.getClass() == GuiChat.class)
+            InputWindow.showGUI();
+        //TODO add other gui
     }
 }

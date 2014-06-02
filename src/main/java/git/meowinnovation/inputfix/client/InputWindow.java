@@ -42,8 +42,6 @@ public class InputWindow {
 		frame.setVisible(true);
 		comp.requestFocus();
 		
-		
-		
 		KeyStroke enter = KeyStroke
 				.getKeyStroke(KeyEvent.VK_ENTER, 0);
 		KeyStroke esc = KeyStroke
