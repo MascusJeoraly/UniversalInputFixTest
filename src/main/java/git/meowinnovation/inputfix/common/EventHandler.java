@@ -32,12 +32,10 @@ import java.io.IOException;
 public class EventHandler {
 	public static EventHandler instance = new EventHandler();
 
-	@SubscribeEvent
-	public void openMainMenu(GuiOpenEvent event) throws IOException {
-		if (event.gui != null && event.gui.getClass() == GuiChat.class) {
-			event.setCanceled(true);
-			InputWindow.showGUI();
-			// TODO add other gui
-		}
-	}
+    @SubscribeEvent
+    public void openMainMenu(GuiOpenEvent event) throws IOException {
+        if (event.gui == null) return;
+        if (event.gui.getClass() == GuiChat.class || event.gui.allowUserInput)
+            InputWindow.showGUI(event.gui);
+    }
 }
