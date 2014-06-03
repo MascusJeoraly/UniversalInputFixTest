@@ -8,6 +8,7 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiChat;
 import net.minecraft.client.settings.KeyBinding;
 
+import org.lwjgl.Sys;
 import org.lwjgl.input.Keyboard;
 
 /**
@@ -46,24 +47,26 @@ public class KeyHandler {
 	public void onKeyInput(InputEvent.KeyInputEvent event) {
 		// if (FMLClientHandler.instance().isGUIOpen(GuiChat.class))
 		// return;
+		Minecraft mc = FMLClientHandler.instance().getClient();
+
 		if (inputkey.isPressed()) {
-			Minecraft mc = FMLClientHandler.instance().getClient();
+			System.out.println("input");
 			// TODO attach Window
-			if (FMLClientHandler.instance().getClient().thePlayer != null) {
+			if (mc.thePlayer != null) {
+				InputWindow.showGUI("");			
 				FMLClientHandler.instance().displayGuiScreen(
 						FMLClientHandler.instance().getClient().thePlayer,
 						new GuiChat());
-				InputWindow.showGUI("");
 			}
 		}
 		if (commandkey.isPressed()) {
-			Minecraft mc = FMLClientHandler.instance().getClient();
+			System.out.println("command");
 			// TODO attach Window
-			if (FMLClientHandler.instance().getClient().thePlayer != null) {
+			if (mc.thePlayer != null) {
+				InputWindow.showGUI("/");
 				FMLClientHandler.instance().displayGuiScreen(
 						FMLClientHandler.instance().getClient().thePlayer,
 						new GuiChat());
-				InputWindow.showGUI("/");
 			}
 		}
 	}

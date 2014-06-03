@@ -95,11 +95,14 @@ public class InputWindow extends JFrame {
 					frame.dispose();
 					FMLClientHandler.instance().getClient().thePlayer
 							.closeScreen();
+					FMLClientHandler.instance().getClient().refreshResources();
 				} else {
 					comp.setText("");
 					frame.dispose();
 					FMLClientHandler.instance().getClient().thePlayer
 							.closeScreen();
+					FMLClientHandler.instance().getClient().refreshResources();
+
 				}
 
 			}
@@ -113,6 +116,7 @@ public class InputWindow extends JFrame {
 				comp.setText("");
 				frame.dispose();
 				FMLClientHandler.instance().getClient().thePlayer.closeScreen();
+				FMLClientHandler.instance().getClient().refreshResources();
 			}
 
 		};
