@@ -7,67 +7,43 @@ import cpw.mods.fml.common.gameevent.InputEvent;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiChat;
 import net.minecraft.client.settings.KeyBinding;
-
-import org.lwjgl.Sys;
+import net.minecraft.util.StatCollector;
 import org.lwjgl.input.Keyboard;
 
 /**
  * Created by Fang0716 on 6/1/2014.
- * 
+ *
  * @author Meow J
  */
 public class KeyHandler {
 
-	public final KeyBinding inputkey;
-	public final KeyBinding commandkey;
+    public final KeyBinding inputKey;
+    public final KeyBinding commandKey;
 
-	public KeyHandler() {
+    public KeyHandler() {
 
-		String inputdescription;
-		String commanddescription;
-		String category = "Universal Input Fix";
-		if (FMLClientHandler.instance().getCurrentLanguage()
-				.equalsIgnoreCase("zh_CN")) {
-			inputdescription = "打开UIF输入窗口";
-			commanddescription = "打开UIF命令输入窗口";
-		} else {
-			inputdescription = "Open Input Window";
-			commanddescription = "Open Command Window";
-		}
-		inputkey = new KeyBinding(inputdescription, Keyboard.KEY_J, category);
-		commandkey = new KeyBinding(commanddescription, Keyboard.KEY_C,
-				category);
+        final String category = "Universal Input Fix";
 
-		ClientRegistry.registerKeyBinding(inputkey);
-		ClientRegistry.registerKeyBinding(commandkey);
+        inputKey = new KeyBinding(StatCollector.translateToLocal("msg.openinput.name"), Keyboard.KEY_T, category);
+        commandKey = new KeyBinding(StatCollector.translateToLocal("msg.opencmd.name"), Keyboard.KEY_SLASH, category);
 
-	}
+        ClientRegistry.registerKeyBinding(inputKey);
+        ClientRegistry.registerKeyBinding(commandKey);
 
-	@SubscribeEvent
-	public void onKeyInput(InputEvent.KeyInputEvent event) {
-		// if (FMLClientHandler.instance().isGUIOpen(GuiChat.class))
-		// return;
-		Minecraft mc = FMLClientHandler.instance().getClient();
+    }
 
-		if (inputkey.isPressed()) {
-			System.out.println("input");
-			// TODO attach Window
-			if (mc.thePlayer != null) {
-				InputWindow.showGUI("");			
-				FMLClientHandler.instance().displayGuiScreen(
-						FMLClientHandler.instance().getClient().thePlayer,
-						new GuiChat());
-			}
-		}
-		if (commandkey.isPressed()) {
-			System.out.println("command");
-			// TODO attach Window
-			if (mc.thePlayer != null) {
-				InputWindow.showGUI("/");
-				FMLClientHandler.instance().displayGuiScreen(
-						FMLClientHandler.instance().getClient().thePlayer,
-						new GuiChat());
-			}
-		}
-	}
+    @SubscribeEvent
+    public void onKeyInput(InputEvent.KeyInputEvent event) {
+        Minecraft mc = FMLClientHandler.instance().getClient();
+        if (mc.thePlayer != null && !InputWindow.isFrameDisplayable()) {
+            if (inputKey.isPressed()) {
+                InputWindow.showGUI("");
+                FMLClientHandler.instance().displayGuiScreen(FMLClientHandler.instance().getClient().thePlayer, new GuiChat());
+            }
+            if (commandKey.isPressed()) {
+                InputWindow.showGUI("/");
+                FMLClientHandler.instance().displayGuiScreen(FMLClientHandler.instance().getClient().thePlayer, new GuiChat());
+            }
+        }
+    }
 }

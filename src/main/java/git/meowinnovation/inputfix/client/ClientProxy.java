@@ -21,8 +21,6 @@ import cpw.mods.fml.common.FMLCommonHandler;
 import git.meowinnovation.inputfix.common.CommonProxy;
 import git.meowinnovation.inputfix.common.EventHandler;
 import net.minecraftforge.common.MinecraftForge;
-import cpw.mods.fml.common.FMLCommonHandler;
-import git.meowinnovation.inputfix.common.CommonProxy;
 
 /**
  * Created by Fang0716 on 6/1/2014.
