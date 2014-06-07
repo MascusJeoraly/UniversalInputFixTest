@@ -7,6 +7,5 @@ package git.meowinnovation.inputfix.common;
  */
 public class CommonProxy {
     public void init() {
-
     }
 }

@@ -18,40 +18,16 @@
 package git.meowinnovation.inputfix.client;
 
 import cpw.mods.fml.client.FMLClientHandler;
-import net.minecraft.client.Minecraft;
-import net.minecraft.client.gui.GuiChat;
-import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.util.StringUtils;
+import org.lwjgl.opengl.Display;
 
 import javax.swing.*;
-
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
-import java.awt.event.MouseAdapter;
-
-import javax.swing.AbstractAction;
-import javax.swing.Action;
-import javax.swing.ActionMap;
-import javax.swing.ButtonGroup;
-import javax.swing.InputMap;
-import javax.swing.JButton;
-import javax.swing.JCheckBox;
-import javax.swing.JComponent;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JRadioButton;
-import javax.swing.JScrollPane;
-import javax.swing.JTextArea;
-import javax.swing.JToggleButton;
-import javax.swing.KeyStroke;
-
-import cpw.mods.fml.client.FMLClientHandler;
-import cpw.mods.fml.common.Mod.EventHandler;
-
-import org.lwjgl.opengl.Display;
 
 public class InputWindow extends JFrame {
+<<<<<<< HEAD
 	final static JFrame frame = new JFrame("Input Window");
 	final static JTextArea comp = new JTextArea();
 	final static JScrollPane scroll = new JScrollPane(comp);
@@ -133,4 +109,78 @@ public class InputWindow extends JFrame {
 		frame.dispose();
 	}
 
+=======
+    final static JFrame frame = new JFrame("Input Window");
+    final static JTextArea comp = new JTextArea();
+    final static JScrollPane scroll = new JScrollPane(comp);
+    final static Font font = new Font("微软雅黑", 0, 17);
+
+    public static void showGUI(String text) {
+        frame.getContentPane().add(scroll, BorderLayout.CENTER);
+        scroll.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
+        comp.setFont(font);
+
+        if (text.equalsIgnoreCase("/")) {
+            comp.setText(text);
+            comp.setSelectionStart(1);
+            comp.setSelectionEnd(1);
+        }
+        frame.setSize(Display.getWidth(), 25);
+        frame.setUndecorated(true);
+        frame.setLocation(Display.getX(), Display.getY() + Display.getHeight() + 30);
+        frame.setAlwaysOnTop(true);
+        frame.setVisible(true);
+
+        //Request focus
+        FMLClientHandler.instance().getClient().setIngameNotInFocus();
+        comp.requestFocus();
+
+        KeyStroke enter = KeyStroke.getKeyStroke(KeyEvent.VK_ENTER, 0);
+        KeyStroke esc = KeyStroke.getKeyStroke(KeyEvent.VK_ESCAPE, 0);
+        InputMap inputmap = comp.getInputMap();
+        ActionMap actionmap = comp.getActionMap();
+
+        Action enterAction = new AbstractAction() {
+            @Override
+            public void actionPerformed(ActionEvent event) {
+                if (!StringUtils.isNullOrEmpty(comp.getText())) {
+                    FMLClientHandler.instance().getClient().thePlayer.sendChatMessage(comp.getText());
+                    comp.setText("");
+                    frame.dispose();
+                    FMLClientHandler.instance().getClient().thePlayer.closeScreen();
+                    FMLClientHandler.instance().getClient().setIngameFocus();
+                } else {
+                    comp.setText("");
+                    frame.dispose();
+                    FMLClientHandler.instance().getClient().thePlayer.closeScreen();
+                    FMLClientHandler.instance().getClient().setIngameFocus();
+                }
+            }
+        };
+
+        Action escAction = new AbstractAction() {
+            @Override
+            public void actionPerformed(ActionEvent event) {
+                comp.setText("");
+                frame.dispose();
+                FMLClientHandler.instance().getClient().thePlayer.closeScreen();
+                FMLClientHandler.instance().getClient().setIngameFocus();
+            }
+        };
+
+        inputmap.put(enter, "enter");
+        inputmap.put(esc, "esc");
+        actionmap.put("enter", enterAction);
+        actionmap.put("esc", escAction);
+
+    }
+
+    public static void closeframe() {
+        frame.dispose();
+    }
+
+    public static boolean isFrameDisplayable() {
+        return frame.isDisplayable();
+    }
+>>>>>>> FETCH_HEAD
 }
