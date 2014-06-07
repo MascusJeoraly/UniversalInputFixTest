@@ -12,7 +12,7 @@ import git.meowinnovation.inputfix.common.CommonProxy;
  *
  * @author Meow J and Brian
  */
-@Mod(modid = UniversalInputFix.MODID, name = UniversalInputFix.NAME, version = "0.0.1")
+@Mod(modid = UniversalInputFix.MODID, name = UniversalInputFix.NAME, version = "0.0.2")
 public class UniversalInputFix {
     public static final String MODID = "UniversalInputFix";
     public static final String NAME = "Universal Input Fix";
