@@ -20,6 +20,11 @@ package git.meowinnovation.inputfix.common;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import git.meowinnovation.inputfix.client.InputWindow;
 import net.minecraft.client.gui.GuiMainMenu;
+<<<<<<< HEAD
+import net.minecraft.client.gui.GuiScreen;
+import net.minecraftforge.client.event.ClientChatReceivedEvent;
+=======
+>>>>>>> FETCH_HEAD
 import net.minecraftforge.client.event.GuiOpenEvent;
 
 import java.io.IOException;
@@ -30,6 +35,27 @@ import java.io.IOException;
  * @author Meow J
  */
 public class EventHandler {
+<<<<<<< HEAD
+	public static EventHandler instance = new EventHandler();
+	
+	@SubscribeEvent
+	public void openMainMenu(GuiOpenEvent event) throws IOException {
+		if (event.gui == null)
+			return;
+//		
+		if (event.gui.getClass() == GuiChat.class || event.gui.allowUserInput){
+			InputWindow.showGUI("");			
+		}
+		
+		if (event.gui.getClass() == GuiMainMenu.class){
+			InputWindow.closeframe();}
+		
+		
+	}
+	
+	
+	
+=======
     public static EventHandler instance = new EventHandler();
 
     @SubscribeEvent
@@ -42,4 +68,5 @@ public class EventHandler {
     }
 
 
+>>>>>>> FETCH_HEAD
 }

@@ -32,7 +32,7 @@ public class ClientProxy extends CommonProxy {
     @Override
     public void init() {
         super.init();
-        FMLCommonHandler.instance().bus().register(new KeyHandler());
+//        FMLCommonHandler.instance().bus().register(new KeyHandler());
         MinecraftForge.EVENT_BUS.register(EventHandler.instance);
     }
 }

@@ -27,6 +27,89 @@ import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
 
 public class InputWindow extends JFrame {
+<<<<<<< HEAD
+	final static JFrame frame = new JFrame("Input Window");
+	final static JTextArea comp = new JTextArea();
+	final static JScrollPane scroll = new JScrollPane(comp);
+	final static Font font = new Font("微软雅黑", 0 , 17);
+
+	public static void showGUI(String text) {
+		frame.getContentPane().add(scroll, BorderLayout.CENTER);
+		scroll.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
+		comp.setFont(font);
+
+		if (text.equalsIgnoreCase("/")) {
+			comp.setText(text);
+			comp.setSelectionStart(1);
+			comp.setSelectionEnd(1);
+		}
+		frame.setSize(Display.getWidth(), 25);
+		frame.setUndecorated(true);
+		frame.setLocation(Display.getX(), Display.getY() + Display.getHeight()
+				- 5);
+		frame.setAlwaysOnTop(true);
+		frame.setVisible(true);
+
+		FMLClientHandler.instance().getClient().setIngameNotInFocus();
+		comp.requestFocus();
+
+		KeyStroke enter = KeyStroke.getKeyStroke(KeyEvent.VK_ENTER, 0);
+		KeyStroke esc = KeyStroke.getKeyStroke(KeyEvent.VK_ESCAPE, 0);
+		InputMap inputmap = comp.getInputMap();
+		ActionMap actionmap = comp.getActionMap();
+
+		Action enteraction = new AbstractAction() {
+
+			private Minecraft mc;
+
+			@Override
+			public void actionPerformed(ActionEvent event) {
+				if (!StringUtils.isNullOrEmpty(comp.getText())) {
+					FMLClientHandler.instance().getClient().thePlayer
+							.sendChatMessage(comp.getText());
+					comp.setText("");
+					frame.dispose();
+					FMLClientHandler.instance().getClient().thePlayer
+							.closeScreen();
+		            this.mc.displayGuiScreen((GuiScreen)null);
+				} else {
+					comp.setText("");
+					frame.dispose();
+					FMLClientHandler.instance().getClient().thePlayer
+							.closeScreen();
+		            this.mc.displayGuiScreen((GuiScreen)null);
+				}
+
+			}
+
+		};
+
+		Action escaction = new AbstractAction() {
+
+			private Minecraft mc;
+
+			@Override
+			public void actionPerformed(ActionEvent event) {
+				comp.setText("");
+				frame.dispose();
+				FMLClientHandler.instance().getClient().thePlayer.closeScreen();
+	            this.mc.displayGuiScreen((GuiScreen)null);
+			}
+
+		};
+
+		inputmap.put(enter, "enter");
+		inputmap.put(esc, "esc");
+		actionmap.put("enter", enteraction);
+		actionmap.put("esc", escaction);
+
+	}
+
+	public static void closeframe() {
+		frame.dispose();
+	}
+
+=======
     final static JFrame frame = new JFrame("Input Window");
     final static JTextArea comp = new JTextArea();
     final static JScrollPane scroll = new JScrollPane(comp);
@@ -99,4 +182,5 @@ public class InputWindow extends JFrame {
     public static boolean isFrameDisplayable() {
         return frame.isDisplayable();
     }
+>>>>>>> FETCH_HEAD
 }
