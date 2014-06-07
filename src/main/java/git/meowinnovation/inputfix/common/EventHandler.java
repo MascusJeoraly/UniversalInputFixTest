@@ -23,6 +23,7 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiChat;
 import net.minecraft.client.gui.GuiMainMenu;
 import net.minecraft.client.gui.GuiScreen;
+import net.minecraftforge.client.event.ClientChatReceivedEvent;
 import net.minecraftforge.client.event.GuiOpenEvent;
 
 import java.io.IOException;
@@ -40,14 +41,16 @@ public class EventHandler {
 		if (event.gui == null)
 			return;
 //		
-//		if (event.gui.getClass() == GuiChat.class || event.gui.allowUserInput)
-//			InputWindow.showGUI(event.gui);
+		if (event.gui.getClass() == GuiChat.class || event.gui.allowUserInput){
+			InputWindow.showGUI("");			
+		}
 		
 		if (event.gui.getClass() == GuiMainMenu.class){
 			InputWindow.closeframe();}
 		
 		
 	}
+	
 	
 	
 }

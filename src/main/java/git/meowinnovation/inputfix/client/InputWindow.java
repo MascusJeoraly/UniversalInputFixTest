@@ -95,11 +95,13 @@ public class InputWindow extends JFrame {
 					frame.dispose();
 					FMLClientHandler.instance().getClient().thePlayer
 							.closeScreen();
+		            this.mc.displayGuiScreen((GuiScreen)null);
 				} else {
 					comp.setText("");
 					frame.dispose();
 					FMLClientHandler.instance().getClient().thePlayer
 							.closeScreen();
+		            this.mc.displayGuiScreen((GuiScreen)null);
 				}
 
 			}
@@ -108,11 +110,14 @@ public class InputWindow extends JFrame {
 
 		Action escaction = new AbstractAction() {
 
+			private Minecraft mc;
+
 			@Override
 			public void actionPerformed(ActionEvent event) {
 				comp.setText("");
 				frame.dispose();
 				FMLClientHandler.instance().getClient().thePlayer.closeScreen();
+	            this.mc.displayGuiScreen((GuiScreen)null);
 			}
 
 		};
