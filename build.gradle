@@ -25,7 +25,7 @@ group= "git.meowinnovation.inputfix"
 archivesBaseName = "UniversalInputFix"
 
 minecraft {
-    version = "1.7.2-10.12.1.1103"
+    version = "1.7.2-10.12.2.1121"
     assetDir = "eclipse/assets"
 }
 processResources
