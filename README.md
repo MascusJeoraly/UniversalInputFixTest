@@ -1,6 +1,6 @@
 # Universal Input Fix #
 
-Input fix for GNU/Linux Mac Windows.(Test)
+Input fix for GNU/Linux & Mac.(Test)
 
 Build:
 
