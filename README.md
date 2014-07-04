@@ -1,11 +1,10 @@
 # Universal Input Fix #
 
-Input fix for GNU/Linux Mac Windows.(Test)
+Input fix for GNU/Linux & Mac.(Test)
 
-Use
+Build:
 
-	git clone https://github.com/MeowInnovation/UniversalInputFixTest.git
-	gradle setupDecompWorkspace
-	gradle idea //gradle eclipse if you use eclipse
-	gradle build
-to build.
+	$ git clone https://github.com/MeowInnovation/UniversalInputFixTest.git
+	$ cd UniversalInputFixTest/
+	$ gradle setupCIWorkspace
+	$ gradle build
