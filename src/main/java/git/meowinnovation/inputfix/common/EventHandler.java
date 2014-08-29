@@ -19,6 +19,7 @@ package git.meowinnovation.inputfix.common;
 
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import git.meowinnovation.inputfix.client.InputWindow;
+import net.minecraft.client.gui.GuiChat;
 import net.minecraft.client.gui.GuiMainMenu;
 import net.minecraftforge.client.event.GuiOpenEvent;
 
@@ -26,20 +27,22 @@ import java.io.IOException;
 
 /**
  * Created by Fang0716 on 6/2/2014.
- *
+ * 
  * @author Meow J
  */
 public class EventHandler {
-    public static EventHandler instance = new EventHandler();
+	public static EventHandler instance = new EventHandler();
 
-    @SubscribeEvent
-    public void onOpenGui(GuiOpenEvent event) throws IOException {
-        if (event.gui == null) {
-            return;
-        } else if (event.gui.getClass() == GuiMainMenu.class) {
-            InputWindow.closeframe();
-        }
-    }
-
+	@SubscribeEvent
+	public void onOpenGui(GuiOpenEvent event) throws IOException {
+		if (event.gui == null) {
+			return;
+		} else if (event.gui.getClass() == GuiMainMenu.class) {
+			InputWindow.closeframe();
+			// } else if (event.gui instanceof GuiChat){
+			// System.out.println("Yoooooooo");
+			// InputWindow.showGUI("");
+		}
+	}
 
 }

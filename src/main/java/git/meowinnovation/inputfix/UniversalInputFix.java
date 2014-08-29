@@ -1,10 +1,15 @@
 package git.meowinnovation.inputfix;
 
+import org.lwjgl.opengl.GLContext;
+
+import net.minecraftforge.common.config.Configuration;
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.SidedProxy;
 import cpw.mods.fml.common.event.FMLInitializationEvent;
 import cpw.mods.fml.common.event.FMLPostInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 import git.meowinnovation.inputfix.common.CommonProxy;
 
 /**
@@ -16,14 +21,19 @@ import git.meowinnovation.inputfix.common.CommonProxy;
 public class UniversalInputFix {
     public static final String MODID = "UniversalInputFix";
     public static final String NAME = "Universal Input Fix";
+    
+
 
     @Mod.Instance(UniversalInputFix.MODID)
     public static UniversalInputFix instance;
+
+
 
     @SidedProxy(clientSide = "git.meowinnovation.inputfix.client.ClientProxy", serverSide = "git.meowinnovation.inputfix.common.CommonProxy")
     public static CommonProxy proxy;
 
     @Mod.EventHandler
+    @SideOnly(Side.CLIENT)
     public void preInit(FMLPreInitializationEvent event) {
         proxy.init();
     }
