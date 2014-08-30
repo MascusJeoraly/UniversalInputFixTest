@@ -6,5 +6,4 @@ Build:
 
 	$ git clone https://github.com/MeowInnovation/UniversalInputFixTest.git
 	$ cd UniversalInputFixTest/
-	$ gradle setupCIWorkspace
-	$ gradle build
+	$ gradle clean setupCIWorkspace build
